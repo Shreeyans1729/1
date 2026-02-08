@@ -16,7 +16,7 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(180deg, #fff0f3 0%, #ffccd5 100%);
-            overflow-x: hidden;
+            overflow: hidden; /* Keeps hearts and buttons inside */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -40,25 +40,24 @@
         }
 
         .container {
-            width: 90%;
+            width: 85%;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
         }
 
-        h1 { color: var(--dark-pink); font-size: 1.8rem; margin-bottom: 20px; }
+        h1 { color: var(--dark-pink); font-size: 1.6rem; margin-bottom: 30px; line-height: 1.4; }
 
-        /* Buttons */
+        /* Button Logic */
         .btn-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             gap: 20px;
-            min-height: 200px;
+            margin-top: 20px;
         }
 
         #yesBtn {
@@ -69,100 +68,101 @@
             font-size: 1.2rem;
             border-radius: 50px;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
-            z-index: 100;
+            box-shadow: 0 5px 15px rgba(67, 170, 139, 0.4);
         }
 
         #noBtn {
             background-color: var(--primary-pink);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border-radius: 50px;
-            position: absolute;
-            cursor: pointer;
-            transition: 0.1s;
+            position: absolute; /* Needed for the jumping effect */
+            transition: 0.2s ease;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .hidden { display: none !important; }
 
-        /* Success Page Styles */
-        .gif-img { width: 100%; max-width: 250px; border-radius: 20px; margin: 20px 0; }
+        /* Success & Graffiti */
+        .gif-img { width: 100%; max-width: 250px; border-radius: 20px; margin: 20px 0; border: 5px solid white; }
         
         .graffiti {
             position: fixed;
             font-weight: 900;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary-pink);
             opacity: 0.3;
             pointer-events: none;
+            z-index: 5;
         }
 
-        /* Letter Page Styles */
         .letter-card {
             background: white;
             padding: 25px;
             border-radius: 15px;
             text-align: left;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         .reason-box {
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 15px;
             background: #fff0f3;
             border-left: 5px solid var(--dark-pink);
             font-style: italic;
-            min-height: 50px;
+            border-radius: 0 10px 10px 0;
         }
 
         .next-btn {
             background: var(--dark-pink);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 15px 25px;
+            border-radius: 12px;
             margin-top: 20px;
             width: 100%;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="PASTE_MUSIC_URL_HERE" type="audio/mpeg">
-    </audio>
-
     <div id="page1" class="container">
-        <h1>SATYAM, WILL YOU BE MY VALENTINE? 💖</h1>
+        <h1>SATYAM,<br>WILL YOU BE MY VALENTINE? 💖</h1>
         <div class="btn-container">
             <button id="yesBtn" onclick="nextPage(2)">YES</button>
-            <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">NO</button>
+            <button id="noBtn" onmouseover="handleNo()" ontouchstart="handleNo()">NO</button>
         </div>
     </div>
 
     <div id="page2" class="container hidden">
-        <h1 style="font-size: 2.5rem;">I KNEW YOU LOVE ME! 🥰</h1>
+        <h1 style="font-size: 2.2rem;"><b>I KNEW YOU LOVE ME! 🥰</b></h1>
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueW95bjZ0bmN4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnVwaWRzPTg0NjkxOTI5JnB0PWFwcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L8G2fVpS74W5O/giphy.gif" class="gif-img">
-        <button class="next-btn" onclick="nextPage(3)">Read my letter for you...</button>
+        <button class="next-btn" onclick="nextPage(3)">Click for something special...</button>
     </div>
 
     <div id="page3" class="container hidden">
         <div class="letter-card">
-            <h2 style="color: var(--dark-pink);">Dearest Satyam,</h2>
-            <p>Every day with you feels like a dream I never want to wake up from. You are my calm in the chaos and my favorite reason to smile.</p>
-            <p>I made this just to remind you how much you mean to me. You are stuck with me forever! ❤️</p>
+            <h2 style="color: var(--dark-pink); margin-top: 0;">To My Satyam,</h2>
+            <p>Every moment with you is a treasure. You make my life colorful and full of joy. I am so lucky to have you by my side.</p>
+            <p>This little page is just a small way to say I love you more than words can express!</p>
             
-            <div class="reason-box" id="reasonBox">Click the button below to see why I love you...</div>
-            <button class="next-btn" style="background: #43aa8b;" onclick="showReason()">Give me a reason! ✨</button>
+            <div class="reason-box" id="reasonBox">Click the button for a surprise...</div>
+            <button class="next-btn" style="background: #43aa8b;" onclick="showReason()">Why I love you ✨</button>
             
-            <p style="text-align: right; margin-top: 20px;"><b>Always yours, Diksha</b></p>
+            <p style="text-align: right; margin-top: 25px;"><b>Forever yours, <br> Diksha</b></p>
         </div>
     </div>
 
     <script>
-        // Floating Hearts Logic
+        // Floating Hearts
         function createHearts() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -174,25 +174,42 @@
         }
         setInterval(createHearts, 400);
 
-        // No Button & Growing Yes
-        let yesSize = 1.2;
-        let noTexts = ["Are you sure?", "Really?", "Pwease?", "Satyam...", "I'll be sad!", "Click YES!"];
+        // No Button & Text Change Logic
+        let yesSize = 1;
+        const noTexts = [
+            "Are you sure?", 
+            "Really?", 
+            "Think again!", 
+            "Satyam, please?", 
+            "You're making me cry! 🥺", 
+            "Wrong button!", 
+            "I'll give you chocolate! 🍫",
+            "Don't be mean!",
+            "Click YES already!"
+        ];
         let textIdx = 0;
 
-        function moveNo() {
+        function handleNo() {
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
             
-            // Move NO button
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            // 1. Move the button to a random position
+            const padding = 50;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // 2. Change the text
             noBtn.innerText = noTexts[textIdx];
             textIdx = (textIdx + 1) % noTexts.length;
 
-            // Make YES button grow
-            yesSize += 0.2;
+            // 3. Make the YES button bigger
+            yesSize += 0.15;
             yesBtn.style.transform = `scale(${yesSize})`;
         }
 
@@ -203,33 +220,29 @@
             document.getElementById('page3').classList.add('hidden');
             document.getElementById('page' + num).classList.remove('hidden');
 
-            if(num === 2) {
-                spawnGraffiti();
-                document.getElementById('bgMusic').play(); // Try to play music
-            }
+            if(num === 2) { spawnGraffiti(); }
         }
 
         function spawnGraffiti() {
-            const words = ["LOVE", "SATYAM", "DIKSHA", "FOREVER", "MINE"];
-            for(let i=0; i<20; i++) {
+            const words = ["LOVE", "SATYAM", "DIKSHA", "MINE", "FOREVER"];
+            for(let i=0; i<15; i++) {
                 let div = document.createElement('div');
                 div.className = 'graffiti';
                 div.innerText = words[Math.floor(Math.random()*words.length)];
-                div.style.left = Math.random()*90 + 'vw';
-                div.style.top = Math.random()*90 + 'vh';
+                div.style.left = Math.random()*80 + 'vw';
+                div.style.top = Math.random()*80 + 'vh';
                 div.style.transform = `rotate(${Math.random()*40 - 20}deg)`;
                 document.body.appendChild(div);
             }
         }
 
         const reasons = [
-            "Your smile makes my worst days better.",
-            "The way you care for the little things.",
-            "Because you're my best friend first.",
-            "The way you look at me when I'm talking.",
-            "Because you make me feel safe and loved.",
-            "Your weird sense of humor that matches mine!",
-            "I love how I can just be myself around you."
+            "You make me feel like the luckiest girl!",
+            "Your kindness is literally my favorite thing.",
+            "I love how you always know how to make me laugh.",
+            "Because you are my home and my adventure.",
+            "The way you support my dreams means everything.",
+            "Just for being the amazing Satyam you are!"
         ];
 
         function showReason() {
